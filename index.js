@@ -27,6 +27,7 @@ process.on('unhandledRejection', (error, promise) => {
     console.log(' The error was: ', error);
 });
 
+//To use client build folder in production
 if(process.env.NODE_ENV=="production"){
     app.use(express.static('client/build'))
     const path=require('path')
