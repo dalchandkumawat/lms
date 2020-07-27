@@ -9,19 +9,21 @@ const Home = () => {
     const [subjectSorted,setSubjectSorted]=useState(false);
     const history=useHistory();
     useEffect(()=>{
-        fetch('/getclasses',{
-            headers:{
-                "authorization":"Bearer "+localStorage.getItem("jwt")
-            }
-        }).then(res=>res.json())
-        .then(result=>{
-            if(result.error){
-                M.toast({html:result.error,classes:"#c62727 red darken-3"});
-            }
-            else{
-                setClasses(result.classes);
-            }
-        })
+        if(state!=null){
+            fetch('/getclasses',{
+                headers:{
+                    "authorization":"Bearer "+localStorage.getItem("jwt")
+                }
+            }).then(res=>res.json())
+            .then(result=>{
+                if(result.error){
+                    M.toast({html:result.error,classes:"#c62727 red darken-3"});
+                }
+                else{
+                    setClasses(result.classes);
+                }
+            })
+        }
     },[]);
     const classClicked=(toLink)=>{
         history.push(toLink)
